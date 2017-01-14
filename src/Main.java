@@ -7,7 +7,7 @@ import Strategy.ActivationFunctions;
 /**
  * Created by EmilKarlsson on 11/27/16.
  */
-public class main
+public class Main
 {
     public static void main(String[] args)
     {
