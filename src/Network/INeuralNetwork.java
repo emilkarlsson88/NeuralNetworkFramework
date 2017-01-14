@@ -1,6 +1,6 @@
 package Network;
 
-import DataStructure.TrainigDataCollection;
+import DataStructure.TrainingDataCollection;
 import DataStructure.TrainingData;
 
 import java.util.ArrayList;
@@ -10,19 +10,14 @@ import java.util.ArrayList;
  */
 public interface INeuralNetwork
 {
-    public void TrainNetwork(TrainingData data); // Traningdata
-    public void TrainNetwork(TrainigDataCollection dataCollection, int iterations);
-    public void ConnectNeuron(INeuron source, INeuron destination,double weight);
-    public void ConnectNeuron(INeuron source, INeuron destination);
-    public void ConnectLayers(NeuronLayer layer1, NeuronLayer layer2);
-    public void ConnectLayers();
-    public ArrayList<Double> RunNetwork(ArrayList<Double> input);
-    public ArrayList<Double> getOutput();
-    public ArrayList<NeuronLayer> getHiddenLayers();
-    public void addLayer(NeuronLayer layer);
-    public NeuronLayer getInputLayer();
-    public NeuronLayer getOutputLayer();
-    public double getError();
+    void TrainNetwork(TrainingData data); // Traningdata
+    void TrainNetwork(TrainingDataCollection dataCollection, int iterations);
+    ArrayList<Double> RunNetwork(ArrayList<Double> input);
+    ArrayList<Double> getOutput();
+    ArrayList<NeuronLayer> getHiddenLayers();
+    NeuronLayer getInputLayer();
+    NeuronLayer getOutputLayer();
+    double getError();
 
 
 

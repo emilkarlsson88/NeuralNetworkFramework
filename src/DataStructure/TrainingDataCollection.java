@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by EmilKarlsson on 11/27/16.
  */
-public class TrainigDataCollection extends ArrayList<TrainingData>
+public class TrainingDataCollection extends ArrayList<TrainingData>
 {
 
     public TrainingData getRandom()

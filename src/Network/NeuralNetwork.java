@@ -1,8 +1,10 @@
 package Network;
 
 import DataStructure.NeuronLayerArray;
-import DataStructure.TrainigDataCollection;
+import DataStructure.TrainingDataCollection;
 import DataStructure.TrainingData;
+import Strategy.INeuronStrategy;
+import Strategy.NeuronStrategyFactory;
 import Utility.Utility;
 
 import java.util.ArrayList;
@@ -10,10 +12,52 @@ import java.util.ArrayList;
 /**
  * Created by EmilKarlsson on 11/27/16.
  */
-public class NeuralNetwork implements INeuralNetwork {
+public class NeuralNetwork implements INeuralNetwork
+{
 
-    private NeuronLayerArray layer = new NeuronLayerArray();
+    private NeuronLayerArray layerArray = new NeuronLayerArray();
     private double error = 0;
+
+    private NeuralNetwork(CreateNetwork network)
+    {
+        NeuronStrategyFactory strategyFactory = new NeuronStrategyFactory();
+
+        NeuronLayer layer = new NeuronLayer("InputLayer");
+
+        for (int i = 1; i <= network.inputLayer.getNumOfNeuron(); i++)
+        {
+            INeuronStrategy strat = strategyFactory.createStrategy(network.inputLayer.getTypeOfFunction(),network.inputLayer.getLearningRate());
+            layer.add(new Neuron(strat,"Network.Neuron " + i));
+        }
+
+        layerArray.add(layer);
+
+        int hiddenLayerNumber = 1;
+
+        for (LayerProperties hiddenLayer : network.hiddenLayerArray)
+        {
+            layer = new NeuronLayer("HiddenLayer " + hiddenLayerNumber);
+            for (int i = 1; i <= hiddenLayer.getNumOfNeuron(); i++)
+            {
+                INeuronStrategy strat = strategyFactory.createStrategy(hiddenLayer.getTypeOfFunction(),hiddenLayer.getLearningRate());
+                layer.add(new Neuron(strat,"Network.Neuron " + i + hiddenLayerNumber));
+            }
+
+            layerArray.add(layer);
+            hiddenLayerNumber++;
+        }
+
+        layer = new NeuronLayer("OutputLayer");
+
+        for (int i = 1; i <= network.outputLayer.getNumOfNeuron(); i++)
+        {
+            INeuronStrategy strat = strategyFactory.createStrategy(network.outputLayer.getTypeOfFunction(),network.outputLayer.getLearningRate());
+            layer.add(new Neuron(strat,"Network.Neuron " + i));
+        }
+        layerArray.add(layer);
+
+        this.ConnectLayers();
+    }
 
     @Override
     public void TrainNetwork(TrainingData data) {
@@ -47,16 +91,16 @@ public class NeuralNetwork implements INeuralNetwork {
             i++;
         }
 
-        for (i = layer.size()-2 ; i >= 0; i--)
+        for (i = layerArray.size()-2 ; i >= 0; i--)
         {
-            NeuronLayer layer = this.layer.get(i);
+            NeuronLayer layer = layerArray.get(i);
             for (INeuron neuron : layer)
             {
                 neuron.UpdateDelta();
             }
         }
 
-        for (NeuronLayer layer : this.layer.getLayersWithParm())
+        for (NeuronLayer layer : layerArray.getLayersWithParm())
         {
             for (INeuron neuron : layer )
             {
@@ -66,7 +110,7 @@ public class NeuralNetwork implements INeuralNetwork {
     }
 
     @Override
-    public void TrainNetwork(TrainigDataCollection dataCollection, int iterations) {
+    public void TrainNetwork(TrainingDataCollection dataCollection, int iterations) {
 
         error = 0;
         for (int i = 1 ; i <=iterations;i++)
@@ -81,21 +125,18 @@ public class NeuralNetwork implements INeuralNetwork {
         }
     }
 
-    @Override
-    public void ConnectNeuron(INeuron source, INeuron destination, double weight) {
+    private void ConnectNeuron(INeuron source, INeuron destination, double weight) {
 
         destination.addToInputs(source,weight);
         source.addToForwardConnections(destination);
     }
 
-    @Override
-    public void ConnectNeuron(INeuron source, INeuron destination) {
+    private void ConnectNeuron(INeuron source, INeuron destination) {
 
         this.ConnectNeuron(source,destination, Utility.getRandom());
     }
 
-    @Override
-    public void ConnectLayers(NeuronLayer layer1, NeuronLayer layer2) {
+    private void ConnectLayers(NeuronLayer layer1, NeuronLayer layer2) {
 
         for (INeuron inputNeuron : layer1)
         {
@@ -106,12 +147,11 @@ public class NeuralNetwork implements INeuralNetwork {
         }
     }
 
-    @Override
-    public void ConnectLayers()
+    private void ConnectLayers()
     {
-        for (int i = 0; i < layer.size()-1;i++)
+        for (int i = 0; i < layerArray.size()-1;i++)
         {
-            this.ConnectLayers(layer.get(i),layer.get(i+1));
+            this.ConnectLayers(layerArray.get(i),layerArray.get(i+1));
         }
     }
 
@@ -125,7 +165,7 @@ public class NeuralNetwork implements INeuralNetwork {
             i++;
         }
 
-        for (NeuronLayer layer : this.layer.getLayersWithParm())
+        for (NeuronLayer layer : layerArray.getLayersWithParm())
         {
             for (INeuron neuron : layer)
             {
@@ -149,27 +189,22 @@ public class NeuralNetwork implements INeuralNetwork {
 
     @Override
     public ArrayList<NeuronLayer> getHiddenLayers() {
-        return layer.getHiddenLayers();
-    }
-
-    @Override
-    public void addLayer(NeuronLayer layer) {
-        this.layer.addLayer(layer);
+        return layerArray.getHiddenLayers();
     }
 
     private ArrayList<NeuronLayer> getLayersInRevers()
     {
-        return layer.getHiddenLayersInRevers();
+        return layerArray.getHiddenLayersInRevers();
     }
 
     @Override
     public NeuronLayer getInputLayer() {
-        return layer.getInputLayer();
+        return layerArray.getInputLayer();
     }
 
     @Override
     public NeuronLayer getOutputLayer() {
-        return layer.getOutputLayer();
+        return layerArray.getOutputLayer();
     }
 
     @Override
@@ -181,10 +216,40 @@ public class NeuralNetwork implements INeuralNetwork {
     public String toString()
     {
         String str = "Neural Network config:\n";
-        for (NeuronLayer layer : this.layer)
+        for (NeuronLayer layer : layerArray)
         {
             str += layer.toString();
         }
         return str;
+    }
+
+    public static class CreateNetwork
+    {
+        private LayerProperties inputLayer;
+        private LayerProperties outputLayer;
+        private ArrayList<LayerProperties> hiddenLayerArray = new ArrayList<LayerProperties>();
+
+        public CreateNetwork addInputLayer(LayerProperties inputLayer)
+        {
+            this.inputLayer = inputLayer;
+            return this;
+        }
+
+        public CreateNetwork addOutputLayer(LayerProperties outputLayer)
+        {
+            this.outputLayer = outputLayer;
+            return this;
+        }
+
+        public CreateNetwork addHiddenLayer(LayerProperties hiddenlayer)
+        {
+            hiddenLayerArray.add(hiddenlayer);
+            return this;
+        }
+
+        public NeuralNetwork build()
+        {
+            return new NeuralNetwork(this);
+        }
     }
 }
