@@ -23,11 +23,10 @@ public class main
         LayerProperties outputLayer = new LayerProperties(ActivationFunctions.LogSigmoid,0.9,1);
 
         hiddenMap.put(1,new LayerProperties(ActivationFunctions.SmoothTan,0.9,3));
-        //hiddenMap.put(2,new LayerProperties(ActivationFunctions.SmoothTan,0.9,2));
 
         INeuralNetwork neuralNetwork = factory.CreateNetwork(inputLayer,outputLayer,hiddenMap);
-
-        TrainigDataCollection dataSet = new TrainigDataCollection();
+        // this is a new start on a breanch
+        /*TrainigDataCollection dataSet = new TrainigDataCollection();
 
         TrainingData data1 = new TrainingData();
         data1.addToInput(1.0);
@@ -78,5 +77,6 @@ public class main
         out = neuralNetwork.RunNetwork(in);
         System.out.println("Input: " + in.toString());
         System.out.println("Output: " + out.toString());
+        */
     }
 }
