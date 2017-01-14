@@ -10,7 +10,6 @@ public class LayerProperties
     private ActivationFunctions typeOfFunction;
     private int numOfNeuron;
 
-
     private double learningRate;
 
     public LayerProperties(ActivationFunctions typeOfFunction,double learningRate, int numOfNeuron) {
@@ -23,23 +22,12 @@ public class LayerProperties
         return learningRate;
     }
 
-    public void setLearningRate(double learningRate) {
-        this.learningRate = learningRate;
-    }
-
     public ActivationFunctions getTypeOfFunction() {
         return typeOfFunction;
-    }
-
-    public void setTypeOfFunction(ActivationFunctions typeOfFunction) {
-        this.typeOfFunction = typeOfFunction;
     }
 
     public int getNumOfNeuron() {
         return numOfNeuron;
     }
 
-    public void setNumOfNeuron(int numOfNeuron) {
-        this.numOfNeuron = numOfNeuron;
-    }
 }
