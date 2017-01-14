@@ -30,4 +30,10 @@ public class LayerProperties
         return numOfNeuron;
     }
 
+    @Override
+    public String toString()
+    {
+        return "LayerProperties : [ " + typeOfFunction.toString() + ", " + numOfNeuron + " ]";
+    }
+
 }
