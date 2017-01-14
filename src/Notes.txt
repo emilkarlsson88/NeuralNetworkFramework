@@ -1,0 +1,8 @@
+1: Log sigmoid is a bad strategy since it can't generate negative values,
+    TanH seems to be better since it can give negative values
+2: the network seems to be sensitive to the initial values the
+    weigths get in the beginning. they are assigned at random now, maybe they should not be?
+3: the network is optimized by gradient decent, but there seems to be other methods to train it
+    Stochastic learning, adaptive learning, etc that could maybe improve the learning.
+4: in order to calculate the bellman error: alpha*J(t) - (J(t-1) - r(t)), the old J(t-1) is needed in the next iteration
+    IDEA: [J(t-1) - r(t)] could be observasation  that is feeded in.
