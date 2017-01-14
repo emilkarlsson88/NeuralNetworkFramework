@@ -17,7 +17,7 @@ public class Main
                 .addOutputLayer(new LayerProperties(ActivationFunctions.LogSigmoid,0.9,1)).build();
 
         TrainingDataCollection dataSet = new TrainingDataCollection();
-
+        // create data
         dataSet.add(new TrainingData.Builder().addToInput(1.0).addToInput(1.0).addToOutput(0.9).build());
         dataSet.add(new TrainingData.Builder().addToInput(0.0).addToInput(1.0).addToOutput(0.1).build());
         dataSet.add(new TrainingData.Builder().addToInput(1.0).addToInput(0.0).addToOutput(0.1).build());
