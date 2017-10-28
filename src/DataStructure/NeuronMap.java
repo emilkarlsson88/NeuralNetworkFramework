@@ -2,11 +2,9 @@ package DataStructure;
 
 import Network.INeuron;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.lang.Double;
-import java.util.Set;
 import Utility.Utility;
 
 
@@ -24,7 +22,7 @@ public class NeuronMap
 
     public void Add(INeuron neuron)
     {
-        map.put(neuron, (Double) Utility.getRandom());
+        map.put(neuron, Utility.getRandom());
     }
 
     public void Remove(INeuron neuron)

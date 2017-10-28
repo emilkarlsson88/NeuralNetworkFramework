@@ -61,8 +61,7 @@ public class SmoothTan implements INeuronStrategy
     @Override
     public String toString()
     {
-        String str = "[ Name :" + name + ", Learning rate: " + Learning_rate + " ]";
-        return str;
+        return "[ Name :" + name + ", Learning rate: " + Learning_rate + " ]";
     }
 
 }

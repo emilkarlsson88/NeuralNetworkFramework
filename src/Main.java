@@ -21,9 +21,9 @@ public class Main
         dataSet.add(new TrainingData.Builder().addToInput(1.0).addToInput(1.0).addToOutput(0.9).build());
         dataSet.add(new TrainingData.Builder().addToInput(0.0).addToInput(1.0).addToOutput(0.1).build());
         dataSet.add(new TrainingData.Builder().addToInput(1.0).addToInput(0.0).addToOutput(0.1).build());
-        dataSet.add(new TrainingData.Builder().addToInput(0.0).addToInput(0.0).addToOutput(0.1).build());
+        dataSet.add(new TrainingData.Builder().addToInput(0.0).addToInput(0.0).addToOutput(0.9).build());
 
-        neuralNetwork.TrainNetwork(dataSet,4000);
+        neuralNetwork.TrainNetwork(dataSet,0.00001,4000);
 
         System.out.println(neuralNetwork.toString());
         System.out.println("Error: " + neuralNetwork.getError());

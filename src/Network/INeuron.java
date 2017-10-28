@@ -9,23 +9,23 @@ import Strategy.INeuronStrategy;
  */
 public interface INeuron
 {
-    public double getBiasValue();
-    public String getName();
-    public void setBiasValue(double bias);
-    public double getOutputValue();
-    public void setOutputValue(double output);
-    public double getDeltaValue();
-    public void setDeltaValue(double delta);
-    public INeuronStrategy getStrategy();
-    public void setStrategy(INeuronStrategy strategy);
-    public NeuronArray ForwardConnections();
-    public void addToForwardConnections(INeuron neuron);
-    public NeuronMap Inputs();
-    public void addToInputs(INeuron neuron, double weight);
-    public void UpdateOutput();
-    public void UpdateDelta(double errorFactor);
-    public void UpdateDelta();
-    public void UpdateFreeParams();
+     double getBiasValue();
+     String getName();
+     void setBiasValue(double bias);
+     double getOutputValue();
+     void setOutputValue(double output);
+     double getDeltaValue();
+     void setDeltaValue(double delta);
+     INeuronStrategy getStrategy();
+     void setStrategy(INeuronStrategy strategy);
+     NeuronArray ForwardConnections();
+     void addToForwardConnections(INeuron neuron);
+     NeuronMap Inputs();
+     void addToInputs(INeuron neuron, double weight);
+     void UpdateOutput();
+     void UpdateDelta(double errorFactor);
+     void UpdateDelta();
+     void UpdateFreeParams();
 
 
 

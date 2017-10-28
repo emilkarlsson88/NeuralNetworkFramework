@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public interface INeuralNetwork
 {
     void TrainNetwork(TrainingData data); // Traningdata
-    void TrainNetwork(TrainingDataCollection dataCollection, int iterations);
+    void TrainNetwork(TrainingDataCollection dataCollection,double tol, int iterations);
     ArrayList<Double> RunNetwork(ArrayList<Double> input);
     ArrayList<Double> getOutput();
     ArrayList<NeuronLayer> getHiddenLayers();

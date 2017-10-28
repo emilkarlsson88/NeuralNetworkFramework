@@ -1,6 +1,5 @@
 package Strategy;
 
-import java.util.ArrayList;
 import DataStructure.NeuronMap;
 
 /**
@@ -8,10 +7,10 @@ import DataStructure.NeuronMap;
  */
 public interface INeuronStrategy
 {
-    public double FindDelta(double output,double errorFactor);
-    public double Activation(double value);
-    public double FindValue(NeuronMap inputs, double bias);
-    public double FindNewBias(double bias,double delta);
-    public void UpdateWeights(NeuronMap connections, double delta);
-    public String getName();
+     double FindDelta(double output,double errorFactor);
+     double Activation(double value);
+     double FindValue(NeuronMap inputs, double bias);
+     double FindNewBias(double bias,double delta);
+     void UpdateWeights(NeuronMap connections, double delta);
+     String getName();
 }

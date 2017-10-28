@@ -2,12 +2,8 @@ package DataStructure.Test;
 
 
 import DataStructure.TrainingData;
-import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by EmilKarlsson on 1/14/17.

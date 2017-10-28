@@ -128,11 +128,10 @@ public class Neuron implements INeuron
     @Override
     public String toString()
     {
-        String str = "Network.Neuron: [Name: " + name + "\n" +
+        return  "Network.Neuron: [Name: " + name + "\n" +
                      "           Strategy: " + strategy.toString() + "\n" +
                      "           Bias: " + Math.round(bias*1000)/1000.0 + "\n" +
                      "           ForwardConnections: " + forwardConnections.toString() + "\n" +
                      "           Inputs: " + inputs.toString() + "]";
-        return str;
     }
 }

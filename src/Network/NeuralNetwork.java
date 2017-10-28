@@ -16,7 +16,7 @@ public class NeuralNetwork implements INeuralNetwork
 {
 
     private NeuronLayerArray layerArray = new NeuronLayerArray();
-    private double error = 0;
+    private double error = 100;
 
     private NeuralNetwork(CreateNetwork network)
     {
@@ -110,19 +110,24 @@ public class NeuralNetwork implements INeuralNetwork
     }
 
     @Override
-    public void TrainNetwork(TrainingDataCollection dataCollection, int iterations) {
+    public void TrainNetwork(TrainingDataCollection dataCollection, double tol,int iterations) {
 
-        error = 0;
-        for (int i = 1 ; i <=iterations;i++)
+        error = 100;
+        int it = 0;
+
+        while (error > tol && it < iterations)
         {
-//            for (TrainingData data : dataCollection)
-//            {
-                TrainingData data = dataCollection.getRandom();
+            double errorTemp = 100;
+            for (TrainingData data : dataCollection)
+            {
                 this.TrainNetwork(data);
-                error = this.getError();
-                //System.out.println(error);
-//            }
+                errorTemp =+ this.getError();
+            }
+            error = errorTemp;
+            it++;
         }
+
+        System.out.println("Traning Done - Error: " + error + ", Iterations: " + it);
     }
 
     private void ConnectNeuron(INeuron source, INeuron destination, double weight) {

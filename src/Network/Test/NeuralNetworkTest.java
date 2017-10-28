@@ -5,8 +5,6 @@ import Network.NeuralNetwork;
 import Strategy.ActivationFunctions;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by EmilKarlsson on 1/14/17.
  */
@@ -21,11 +19,10 @@ public class NeuralNetworkTest
                 .addOutputLayer(new LayerProperties(ActivationFunctions.LogSigmoid,0.9,1)).build();
 
         System.out.println(network.toString());
-
     }
 
     @Test
-    public void LayerPorpertyTest()
+    public void LayerPropertyTest()
     {
         LayerProperties layer = new LayerProperties(ActivationFunctions.SmoothTan,0.1,2);
         System.out.println(layer.toString());

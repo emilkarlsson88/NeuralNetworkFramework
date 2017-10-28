@@ -1,4 +1,6 @@
-package Utility; /**
+package Utility;
+
+/**
  * Created by EmilKarlsson on 11/26/16.
  */
 import java.util.Random;

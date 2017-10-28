@@ -16,7 +16,6 @@ public class LogSigmoid implements INeuronStrategy
         this.Learning_rate = learningRate;
     }
 
-
     @Override
     public double FindDelta(double output, double errorFactor) {
         return output * (1 - output)*errorFactor;
@@ -62,8 +61,7 @@ public class LogSigmoid implements INeuronStrategy
     @Override
     public String toString()
     {
-        String str = "[ Name :" + name + ", Learning rate: " + Learning_rate + " ]";
-        return str;
+        return "[ Name :" + name + ", Learning rate: " + Learning_rate + " ]";
     }
 
 

@@ -4,28 +4,26 @@ import DataStructure.NeuronMap;
 import Network.INeuron;
 
 /**
- * Created by EmilKarlsson on 12/9/16.
+ * Created by EmilKarlsson on 4/9/17.
  */
-public class TanSigmoid implements INeuronStrategy
-{
-    private double Learning_rate;
-    private static final String name = "TanSigmoid";
+public class LinearFunk implements INeuronStrategy {
 
-    public TanSigmoid(double learningRate)
+    private double Learning_rate;
+    private static final String name = "LinearFunk";
+
+    public LinearFunk(double learningRate)
     {
         this.Learning_rate = learningRate;
     }
 
     @Override
-    public double FindDelta(double output, double errorFactor)
-    {
-        return ( 1 - Math.pow(output,2) ) * errorFactor;
+    public double FindDelta(double output, double errorFactor) {
+        return errorFactor;
     }
 
     @Override
-    public double Activation(double value)
-    {
-        return ( Math.exp(value) - Math.exp(-value) )/(Math.exp(value) + Math.exp(-value));
+    public double Activation(double value) {
+        return value;
     }
 
     @Override
@@ -55,8 +53,7 @@ public class TanSigmoid implements INeuronStrategy
     }
 
     @Override
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
@@ -65,4 +62,5 @@ public class TanSigmoid implements INeuronStrategy
     {
         return "[ Name :" + name + ", Learning rate: " + Learning_rate + " ]";
     }
+
 }

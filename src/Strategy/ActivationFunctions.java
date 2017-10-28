@@ -7,5 +7,6 @@ public enum ActivationFunctions
 {
     LogSigmoid,
     TanSigmoid,
-    SmoothTan
+    SmoothTan,
+    LinearFunk
 }
